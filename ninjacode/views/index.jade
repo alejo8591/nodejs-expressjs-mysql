@@ -5,7 +5,16 @@ block content
     h1= title
   section
     form(action='/guardar', method='post')
-      textarea(name='txtPublicacion', required)
+      label
+        | Titulo:
+        <br />
+        input(name='txtTitulo', required)
+        <br />
+      label
+        | Descripcion:
+        <br />
+        textarea(name='txtPublicacion', required)
+      <br />
       button(type='submit') Enviar
   footer
      Tutorial Express

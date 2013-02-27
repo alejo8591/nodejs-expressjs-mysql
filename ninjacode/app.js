@@ -29,13 +29,14 @@ app.configure('development', function(){
 });
 
 function BD(){
-  var cliente = mysql.createClient({
+  var cliente = mysql.createConnection({
     user: 'root',
-    password: 'pilmee',
+    password: 'root',
     host: 'localhost',
-    port: 3306,
-    database: 'ninjacode'
+    port: 8891,
+    database: 'ninjacodetv_noticias'
   });
+  cliente.connect();
   return cliente;
 }
 
@@ -44,11 +45,13 @@ app.get('/users', user.list);
 
 app.post('/guardar', function(req, res){
   var objBD = BD();
-  objBD.query("INSERT INTO `publicacion`(`contenido`) VALUES ('" + req.body.txtPublicacion + "')", function(error){
+  objBD.query("INSERT INTO `noticias`(`titulo`,`contenido`) VALUES ('" + req.body.txtTitulo + "', '"+req.body.txtPublicacion+"')", function(error){
     if(error){
       console.log(error.message);
     }else{
       console.log('Insertado');
+      res.render('Cargado correctamente');
+     objBD.end();
     }
   });
 
